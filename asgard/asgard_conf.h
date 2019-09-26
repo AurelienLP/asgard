@@ -32,7 +32,7 @@ struct AsgardConf {
         socket_path = get_config<std::string>("ASGARD_SOCKET_PATH", "tcp://*:6000");
         cache_size = get_config<size_t>("ASGARD_CACHE_SIZE", 100000);
         nb_threads = get_config<size_t>("ASGARD_NB_THREADS", 3);
-        metrics_binding = get_config<boost::optional<std::string>>("ASGARD_METRICS_BINDING", std::string("127.0.0.1:8080"));
+        metrics_binding = get_config<boost::optional<std::string>>("ASGARD_METRICS_BINDING", std::string("0.0.0.0:8080"));
 
         auto valhalla_conf_json = get_config<std::string>("ASGARD_VALHALLA_CONF", "/data/valhalla/valhalla.json");
         ptree::read_json(valhalla_conf_json, valhalla_conf);

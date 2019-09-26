@@ -1,6 +1,6 @@
 FROM navitia/asgard-build-deps:latest as builder
 
-RUN git clone --depth=1 https://github.com/canaltp/asgard asgard
+RUN git clone --depth=1 --branch test https://github.com/AurelienLP/asgard asgard
 
 WORKDIR /asgard
 RUN sed -i 's,git\@github.com:\([^/]*\)/\(.*\).git,https://github.com/\1/\2,' .gitmodules && git submodule update --init --recursive \
@@ -14,5 +14,5 @@ USER asgard-user
 COPY --from=builder /asgard/build/asgard/asgard /usr/bin/asgard
 COPY --from=builder /usr/lib/ /usr/lib/
 COPY --from=builder /lib/ /lib/
-EXPOSE 6000
+EXPOSE 6000 8080
 ENTRYPOINT ["/usr/bin/asgard"]
