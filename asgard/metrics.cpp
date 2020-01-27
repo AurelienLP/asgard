@@ -51,7 +51,12 @@ static prometheus::Histogram::BucketBoundaries create_fixed_duration_buckets() {
     return bucket_boundaries;
 }
 
-Metrics::Metrics(const AsgardConf& conf) {
+Metrics::Metrics(const boost::optional<const AsgardConf&> config) {
+    if (config == boost::none) {
+        return;
+    }
+    
+    const auto& conf = config.get();
     if (conf.metrics_binding == boost::none) {
         return;
     }

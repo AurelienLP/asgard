@@ -2,6 +2,7 @@
 
 #include <prometheus/exposer.h>
 #include <boost/core/noncopyable.hpp>
+#include <boost/optional.hpp>
 
 #include <map>
 #include <memory>
@@ -39,7 +40,7 @@ protected:
     std::map<const std::string, prometheus::Histogram*> handle_matrix_histogram;
 
 public:
-    Metrics(const AsgardConf& conf);
+    Metrics(const boost::optional<const AsgardConf&> config);
     InFlightGuard start_in_flight() const;
 
     void observe_handle_direct_path(const std::string&, double duration) const;
